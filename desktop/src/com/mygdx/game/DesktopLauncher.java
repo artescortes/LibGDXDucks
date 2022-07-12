@@ -8,8 +8,8 @@ import com.mygdx.game.MainClass;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		config.setTitle("Ducks");
 		config.setForegroundFPS(60);
-		config.setTitle("gdx-game-ducks");
 		new Lwjgl3Application(new MainClass(), config);
 	}
 }
