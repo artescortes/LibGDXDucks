@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.InputHandler;
+import com.mygdx.game.Score;
 import com.mygdx.game.entities.Duck;
 
 import javax.swing.plaf.basic.BasicListUI;
@@ -49,9 +51,22 @@ public class PlayState extends AbstractState {
         for (int i = 0; i < DUCKS_COUNT; i++)  {
             ducks[i].render(batch);
             if (InputHandler.isClicked()) {
-                if (ducks[i].getBounds().contains(InputHandler.getMousePosition().x, InputHandler.getMousePosition().y))
+                if (ducks[i].getBounds().contains(InputHandler.getMousePosition().x, InputHandler.getMousePosition().y)) {
+                    ducks[i].setKilled(true);
+                score++;
+                Score.setScores(score);
+                }
             }
         }
+        font.draw(batch, "Scores: " + score, 10, Gdx.graphics.getHeight() - 20);
+        int x = 0;
+        do {
+            batch.draw(ground, x, 0);
+            batch.draw(grass, -30 + x, -90);
+            x += ground.getWidth();
+        } while (x <= Gdx.graphics.getWidth());
+        Texture sight;
+        //batch.draw(sight, InputHandler.getMousePosition().x - sight.get);
         batch.end();
     }
 
